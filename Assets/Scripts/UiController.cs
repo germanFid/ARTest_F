@@ -8,8 +8,7 @@ public class UiController : MonoBehaviour
 {
     public Canvas arCanvas;
     public Canvas menuCanvas;
-    public Image testImg;
-
+    
     public Texture2D tex; // Texture (image) to track
 
     public ArController controller;
@@ -32,7 +31,6 @@ public class UiController : MonoBehaviour
         } );
         
         Debug.Log( "Permission result: " + permission );
-        testImg.sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);;
         return;
     }
     
@@ -56,11 +54,6 @@ public class UiController : MonoBehaviour
         
         menuCanvas.enabled = true;
         arCanvas.enabled = false;
-    }
-
-    public void FixPermissions()
-    {
-        NativeGallery.RequestPermission(NativeGallery.PermissionType.Read);
     }
 
     private void Start()
