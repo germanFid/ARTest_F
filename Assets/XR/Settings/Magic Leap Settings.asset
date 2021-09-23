@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
-  m_Name: ImageLibrary
+  m_Script: {fileID: 11500000, guid: c6199fb6640743e43ba76362f0cc36f5, type: 3}
+  m_Name: Magic Leap Settings
   m_EditorClassIdentifier: 
-  m_GuidLow: 5322609744701646905
-  m_GuidHigh: 3105171119608737185
-  m_Images: []
+  m_DepthPrecision: 0
+  m_ForceMultipass: 0
+  m_FrameTimingHint: 2
+  m_GLCacheSettings:
+    m_Enabled: 0
+    m_MaxBlobSizeInBytes: 0
+    m_MaxFileSizeInBytes: 0

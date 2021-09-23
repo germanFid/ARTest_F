@@ -7,4 +7,5 @@ EditorBuildSettings:
   m_Scenes: []
   m_configObjects:
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 4377f5b3c170844ae85579004f6b89b1, type: 2}
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 38b0caddb46364fb4a4c9f5c1fa6f360, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ceaa9f80d12b04fb2a4434117c4a4eec, type: 2}
