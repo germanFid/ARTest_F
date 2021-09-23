@@ -8,11 +8,13 @@ public class UiController : MonoBehaviour
 {
     public Canvas arCanvas;
     public Canvas menuCanvas;
-    public Image testImg;
-
-    public Texture2D tex; // Texture (image) to track
-
+    
     public ArController controller;
+    public InputField _InputFieldImgSize;
+    
+    public Texture2D tex; // Texture (image) to track
+    private float imageSize = 0.21f;
+    
     private void PickImage( int maxSize ) // opens a native image picker and returns the location of chosen pic
     {
         NativeGallery.Permission permission = NativeGallery.GetImageFromGallery( ( path ) =>
@@ -32,7 +34,6 @@ public class UiController : MonoBehaviour
         } );
         
         Debug.Log( "Permission result: " + permission );
-        testImg.sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);;
         return;
     }
     
@@ -43,11 +44,10 @@ public class UiController : MonoBehaviour
     }
     public void InitARGallery()
     {
-        // PickImage(1000);
         menuCanvas.enabled = false;
         arCanvas.enabled = true;
         
-        controller.StartAR(tex); // Starts AR session with chosen Texture2D tracking
+        controller.StartAR(tex, imageSize); // Starts AR session with chosen Texture2D tracking
     }
 
     public void ToMenu()
@@ -58,9 +58,10 @@ public class UiController : MonoBehaviour
         arCanvas.enabled = false;
     }
 
-    public void FixPermissions()
+    public void OnImageSizeChanged()
     {
-        NativeGallery.RequestPermission(NativeGallery.PermissionType.Read);
+        Debug.Log("imageSize set to " + _InputFieldImgSize.text);
+        imageSize = float.Parse(_InputFieldImgSize.text);
     }
 
     private void Start()

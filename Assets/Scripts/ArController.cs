@@ -8,7 +8,7 @@ using UnityEngine.XR.ARSubsystems;
 
 public interface IArController 
 {
-    public void StartAR(Texture2D imageTarget);
+    public void StartAR(Texture2D imageTarget, float imageSize);
     public void StopAR();
 }
 
@@ -25,7 +25,7 @@ public class ArController : MonoBehaviour, IArController
 
     public Text TestTxt;
     public Text TestTxt2;
-    void AddImage(Texture2D imageToAdd)
+    void AddImage(Texture2D imageToAdd, float imageSize)
     {
         try
         {
@@ -34,8 +34,7 @@ public class ArController : MonoBehaviour, IArController
                 AddReferenceImageJobState _jobState;
                 _jobState = mutableLibrary.ScheduleAddImageWithValidationJob(
                     imageToAdd,
-                    "img",
-                    0.5f);
+                    "img", imageSize);
                 TestTxt.text = _jobState.status.ToString();
             }
             else
@@ -51,25 +50,26 @@ public class ArController : MonoBehaviour, IArController
         }
     }
     
-    public void StartAR(Texture2D imageTarget)
+    public void StartAR(Texture2D imageTarget, float imageSize)
     {
         TestTxt2.text = "StartAR Started";
         // imageManager.referenceLibrary = imageManager.CreateRuntimeLibrary(runtimeImageLibrary);
         imageManager.referenceLibrary = imageManager.CreateRuntimeLibrary(); // Should create a new RuntimeLib
         TestTxt2.text = "Lib created";
 
-        AddImage(imageTarget);
+        AddImage(imageTarget, imageSize);
         
         TestTxt2.text = "Lib created and Images added";
         
         session.enabled = true;
         imageManager.enabled = true;
 
-        TestTxt2.text = "StartAR Completed!";
+        TestTxt2.text = "imageSize: " + imageSize;
     }
 
     public void StopAR()
     {
+        session.Reset();
         session.enabled = false;
         imageManager.enabled = false;
     }
