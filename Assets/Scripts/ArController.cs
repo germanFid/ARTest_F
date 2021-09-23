@@ -53,7 +53,6 @@ public class ArController : MonoBehaviour, IArController
     public void StartAR(Texture2D imageTarget, float imageSize)
     {
         TestTxt2.text = "StartAR Started";
-        // imageManager.referenceLibrary = imageManager.CreateRuntimeLibrary(runtimeImageLibrary);
         imageManager.referenceLibrary = imageManager.CreateRuntimeLibrary(); // Should create a new RuntimeLib
         TestTxt2.text = "Lib created";
 

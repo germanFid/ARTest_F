@@ -10,10 +10,10 @@ public class UiController : MonoBehaviour
     public Canvas menuCanvas;
     
     public ArController controller;
-    public InputField _InputFieldImgSize;
+    public InputField inputFieldImgSize;
     
     public Texture2D tex; // Texture (image) to track
-    private float imageSize = 0.21f;
+    private float _imageSize = 0.21f;
     
     private void PickImage( int maxSize ) // opens a native image picker and returns the location of chosen pic
     {
@@ -47,7 +47,7 @@ public class UiController : MonoBehaviour
         menuCanvas.enabled = false;
         arCanvas.enabled = true;
         
-        controller.StartAR(tex, imageSize); // Starts AR session with chosen Texture2D tracking
+        controller.StartAR(tex, _imageSize); // Starts AR session with chosen Texture2D tracking
     }
 
     public void ToMenu()
@@ -60,8 +60,8 @@ public class UiController : MonoBehaviour
 
     public void OnImageSizeChanged()
     {
-        Debug.Log("imageSize set to " + _InputFieldImgSize.text);
-        imageSize = float.Parse(_InputFieldImgSize.text);
+        Debug.Log("imageSize set to " + inputFieldImgSize.text);
+        _imageSize = float.Parse(inputFieldImgSize.text);
     }
 
     private void Start()
