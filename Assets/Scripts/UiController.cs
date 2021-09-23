@@ -20,7 +20,7 @@ public class UiController : MonoBehaviour
             Debug.Log( "Image path: " + path );
             if (path != null)
             {
-                Texture2D textureTpm = NativeGallery.LoadImageAtPath( path, maxSize );
+                Texture2D textureTpm = NativeGallery.LoadImageAtPath( path, maxSize, false);
                 if(textureTpm == null)
                 {
                     Debug.Log( "Couldn't load texture from " + path );

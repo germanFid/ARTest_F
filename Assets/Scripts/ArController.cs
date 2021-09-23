@@ -57,6 +57,7 @@ public class ArController : MonoBehaviour, IArController
         // imageManager.referenceLibrary = imageManager.CreateRuntimeLibrary(runtimeImageLibrary);
         imageManager.referenceLibrary = imageManager.CreateRuntimeLibrary(); // Should create a new RuntimeLib
         TestTxt2.text = "Lib created";
+
         AddImage(imageTarget);
         
         TestTxt2.text = "Lib created and Images added";
