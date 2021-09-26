@@ -8,9 +8,17 @@ public class UiController : MonoBehaviour
 {
     public Canvas arCanvas;
     public Canvas menuCanvas;
+    public Canvas serverCanvas;
     
     public ArController controller;
     public InputField inputFieldImgSize;
+    public ImageTargetsServer imageTargetsServer;
+
+    public Dropdown drop;
+    public Text targetId;
+    public Text targetDescription;
+    public Image targetImage;
+    public InputField inputFieldImgSizeServer;
     
     public Texture2D tex; // Texture (image) to track
     private float _imageSize = 0.21f;
@@ -45,6 +53,7 @@ public class UiController : MonoBehaviour
     public void InitARGallery()
     {
         menuCanvas.enabled = false;
+        serverCanvas.enabled = false;
         arCanvas.enabled = true;
         
         controller.StartAR(tex, _imageSize); // Starts AR session with chosen Texture2D tracking
@@ -54,14 +63,47 @@ public class UiController : MonoBehaviour
     {
         controller.StopAR();
         
-        menuCanvas.enabled = true;
         arCanvas.enabled = false;
+        serverCanvas.enabled = false;
+        menuCanvas.enabled = true;
     }
 
     public void OnImageSizeChanged()
     {
-        Debug.Log("imageSize set to " + inputFieldImgSize.text);
-        _imageSize = float.Parse(inputFieldImgSize.text);
+        string size;
+
+        if (menuCanvas.enabled)
+            size = inputFieldImgSize.text;
+        else
+            size = inputFieldImgSizeServer.text;
+
+        Debug.Log("imageSize set to " + size);
+        _imageSize = float.Parse(size);
+    }
+
+    public void ToServerGallery()
+    {
+        menuCanvas.enabled = false;
+        serverCanvas.enabled = true;
+
+        List<string> IDs = imageTargetsServer.GETTargets();
+        drop.AddOptions(IDs);
+    }
+
+    public void OnDropdownOptionSelected()
+    {
+        Dictionary<string, string> data = imageTargetsServer.GETTargetInfo(drop.options[drop.value].text);
+
+        targetId.text = data["id"];
+        targetDescription.text = data["description"];
+
+        Texture2D tmpTexture = new Texture2D(1, 1);
+        tmpTexture.LoadImage(Convert.FromBase64String(data["image"]));
+        tmpTexture.Apply();
+        
+        targetImage.sprite = Sprite.Create(tmpTexture, new Rect(0.0f, 0.0f, tmpTexture.width, tmpTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
+
+        tex = tmpTexture;
     }
 
     private void Start()
