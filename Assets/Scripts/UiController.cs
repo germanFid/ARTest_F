@@ -20,6 +20,8 @@ public class UiController : MonoBehaviour
     public Image targetImage;
     public InputField inputFieldImgSizeServer;
     
+    
+    
     public Texture2D tex; // Texture (image) to track
     private float _imageSize = 0.21f;
     
